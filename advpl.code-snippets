@@ -217,20 +217,17 @@
 	"Protheus doc": {
 		"prefix": "protheusdoc",
 		"body": [
-			"//-------------------------------------------------------------------",
 			"/*/{Protheus.doc} ${function}",
 			"${description}",
 			"@author  Charles Reitz",
 			"@Since   \"$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR\"",
 			"/*/",
-			"//-------------------------------------------------------------------"
 		],
 		"description": "Protheus doc"
 	},
 	"Protheus doc2": {
 		"prefix": "protheusdoc2",
 		"body": [
-			"//-------------------------------------------------------------------",
 			"/*/{Protheus.doc} ${function}",
 			"${description}",
 			"@version ${12.1.33}",
@@ -241,7 +238,6 @@
 			"@param  ${parameter2}, ${Type2}, ${description2}  ",
 			"@return ${return-type description}",
 			"/*/",
-			"//-------------------------------------------------------------------"
 		],
 		"description": "Protheus doc"
 	},
