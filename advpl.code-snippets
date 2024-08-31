@@ -1,4 +1,52 @@
 {
+	"FwExecStatement":{
+		"prefix": "FwExecStatement - Query",
+		"description": "Monta uma query ",
+		"body": [
+			"\tLocal cQuery as character",
+			"\tLocal oQuery as object ",
+			"\tLocal nRecno as numeric",
+			"\t",
+			"\tcQuery := \"SELECT R_E_C_N_O_ RECNO \"",
+			"\tcQuery += \"FROM \"+RetSqlName(\"${table}\")+\" ${table} \"",
+			"\tcQuery += \"WHERE  ${table}.D_E_L_E_T_    = '' \"",
+			"\tcQuery += \"AND ${table}_FILIAL           =  ? \"",
+			"\tcQuery += \"AND ${table}_ID               =  ? \"",
+			"\t",
+			"\toQuery := FwExecStatement():New(cQuery)",
+			"\toQuery:SetString(1, FWxFilial(\"${table}\"))",
+			"\toQuery:SetString(2,/*PESQUISA*/)",
+			"\tcAliasTMP := oQuery:OpenAlias()",
+			"\t",
+			"\toQuery:Destroy()",
+			"\toQuery      := NIL",
+			"\tFreeObj(oQuery)",
+		]
+	},
+	"FWExecScalar":{
+		"prefix": "FWExecScalar - RECNO",
+		"description": "Procura um determinado RECNO na base de dados conforme filtros que podem ser informados",
+		"body": [
+			"\tLocal cQuery as character",
+			"\tLocal oQuery as object ",
+			"\tLocal nRecno as numeric",
+			"\t",
+			"\tcQuery := \"SELECT R_E_C_N_O_ RECNO \"",
+			"\tcQuery += \"FROM \"+RetSqlName(\"${table}\")+\" ${table} \"",
+			"\tcQuery += \"WHERE  ${table}.D_E_L_E_T_    = '' \"",
+			"\tcQuery += \"AND ${table}_FILIAL           =  ? \"",
+			"\tcQuery += \"AND ${table}_ID               =  ? \"",
+			"\t",
+			"\toQuery := FwExecStatement():New(cQuery)",
+			"\toQuery:SetString(1, FWxFilial(\"${table}\"))",
+			"\toQuery:SetString(2,/*PESQUISA*/)",
+			"\tnRecno   := oQuery:ExecScalar(\"RECNO\")",
+			"\t",
+			"\toQuery:Destroy()",
+			"\toQuery      := NIL",
+			"\tFreeObj(oQuery)",
+		]
+	},
 	"MVC Protheus Modelo 2": {
 		"prefix": "MVC Modelo 2",
 		"body": [
@@ -49,8 +97,8 @@
 			"",
 			"/*/",
 			"Static Function ModelDef()",
-			"\tLocal oStruct \t:= \tFWFormStruct( 1,\"${table}\" ,{|cCampo| (AllTRim(cCampo) $ \"${table}_FILIAL|${campo_identificado_unico}\")}, /*lViewUsado*/ )",
-			"\tLocal oStructGrid \t:= \tFWFormStruct( 1, '${table}', {|cCampo| !(AllTRim(cCampo) $ \"${table}_FILIAL|${campo_identificado_unico}\")} /*bAvalCampo*/, /*lViewUsado*/ )",
+			"\tLocal oStruct \t:= \tFWFormStruct( 1,\"${table}\" ,{|a| cCampo:= a, aScan({\"${table}_FILIAL\",\"${campo_identificado_unico}\"}, {|x| x == Alltrim(cCampo) }) > 0, /*lViewUsado*/ )",
+			"\tLocal oStructGrid \t:= \tFWFormStruct( 1, '${table}', {|a| cCampo:= a, aScan({\"${table}_FILIAL\",\"${campo_identificado_unico}\"}, {|x| x == Alltrim(cCampo) }) == 0 /*bAvalCampo*/, /*lViewUsado*/ )",
 			"\tLocal oModel \t:= \tMPFormModel():New('${function}', /*bPreValidacao*/, {|oModel| ValTudoOK(oModel)} /*bPosValidacao*/, {|oModel| SaveModel(oModel)}  /*bCommit*/,/*bCancel*/ )",
 			"",
 			"\toModel:AddFields( '${table}MASTER', /*cOwner*/, oStruct, /*bPreValidacao*/, /*bPosValidacao*/, /*bCarga*/ )",
@@ -77,8 +125,8 @@
 			"/*/",
 			"Static Function ViewDef()",
 			"\tLocal oModel  \t:=\t ModelDef()",
-			"\tLocal oStruct \t:= \tFWFormStruct( 2, '${table}' ,{|cCampo| (AllTRim(cCampo) $ \"${table}_FILIAL|${campo_identificado_unico}\")})",
-			"\tLocal oStructGrid \t:= \tFWFormStruct( 2, '${table}',{|cCampo| !(AllTRim(cCampo) $ \"${table}_FILIAL|${campo_identificado_unico}\")} /*, { |cCampo| Alltrim(cCampo) }*/ )",
+			"\tLocal oStruct \t:= \tFWFormStruct( 2, '${table}' ,{|a| cCampo:= a, aScan({\"${table}_FILIAL\",\"${campo_identificado_unico}\"}, {|x| x == Alltrim(cCampo) }) > 0)",
+			"\tLocal oStructGrid \t:= \tFWFormStruct( 2, '${table}',{|a| cCampo:= a, aScan({\"${table}_FILIAL\",\"${campo_identificado_unico}\"}, {|x| x == Alltrim(cCampo) }) == 0 /*, { |cCampo| Alltrim(cCampo) }*/ )",
 			"\tLocal oView \t:= \tFWFormView():New()",
 			"",
 			"\toView:SetModel( oModel )",
@@ -116,12 +164,11 @@
 			"",
 			"\t\tlRet := FwFormCommit( oModel )",
 			"",
-			"\t\tIf !tlRet",
+			"\t\tIf !lRet",
 			"\t\t\tDISARMTRANSACTION()",
 			"\t\t\tBreak",
 			"\t\tEndIf",
 			"",
-			"\t\tlRet := .T.",
 			"\tEnd Transaction",
 			"",
 			"Return  lRet",
@@ -214,23 +261,22 @@
 		],
 		"description": "LogMsg - Define um log de mensagens"
 	},
-	"Protheus doc": {
-		"prefix": "protheusdoc",
+	"Doc Protheus Modelo 1": {
+		"prefix": "doc protheus modelo 1",
 		"body": [
 			"/*/{Protheus.doc} ${function}",
 			"${description}",
 			"@author  Charles Reitz",
-			"@Since   \"$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR\"",
+			"@since   $CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR",
 			"/*/",
 		],
-		"description": "Protheus doc"
+		"description": "Padrão de documentação inicio de fonte (Modelo 1)"
 	},
-	"Protheus doc2": {
-		"prefix": "protheusdoc2",
+	"Doc Protheus Modelo 2": {
+		"prefix": "doc protheus modelo 2",
 		"body": [
 			"/*/{Protheus.doc} ${function}",
 			"${description}",
-			"@version ${12.1.33}",
 			"@author  Charles Reitz",
 			"@Since   \"$CURRENT_DATE/$CURRENT_MONTH/$CURRENT_YEAR\"",
 			"@link   ${link-text}",
@@ -239,7 +285,7 @@
 			"@return ${return-type description}",
 			"/*/",
 		],
-		"description": "Protheus doc"
+		"description": "PPadrão de documentação inicio de fonte (Modelo 2)"
 	},
 	"TamSX3": {
 		"prefix": "TamSX3",
