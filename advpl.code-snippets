@@ -742,5 +742,90 @@
 			"COUNT TO ncount ",
 			"DbGoTop()"
 		]
+	},
+	"FWUUIDV1": {
+		"prefix": "FWUUIDV1",
+		"body": [
+			"FWUUIDV1()"
+		],
+		"description": "Gera um UUID V1"
+	},
+	"FWUUID": {
+		"prefix": "FWUUID",
+		"body": [
+			"FWUUID()",
+		],
+		"description": "Gera um UUID V4"
+	},
+	"FWUUIDV4" : {
+		"prefix": "FWUUIDV4",
+		"body": [
+			"FWUUIDV4()"
+		],
+		"description": "Gera um UUID V4"
+	},
+	"FWTimeStamp" : {
+		"prefix": "FWTimeStamp",
+		"body": [
+			"FWTimeStamp()"
+		],
+	
+		"description": "Retorna a data e hora atual - https://tdn.totvs.com/display/public/framework/FWTimeStamp"
+	},
+	"FwDateTimeToLocal": {
+		"prefix": "FwDateTimeToLocal",
+		"body": [
+			"FwDateTimeToLocal(${1:/*cDateTime*/})"
+		],
+		"description": "Converte uma data e hora UTC para a hora local - https://tdn.totvs.com/display/public/framework/FwDateTimeToLocal"
+	},
+	"FWIsInCallStack": {
+		"prefix": "FWIsInCallStack",
+		"body": [
+			"FWIsInCallStack(${1:/*cFunction*/})"
+		],
+		"description": "Verifica se a função está na pilha de chamadas - https://tdn.totvs.com/display/public/framework/FWIsInCallStack"
+	},
+	"aEval": {
+		"prefix": "AEval",
+		"body": [
+			"AEval(${1:/*aArray*/}, {|x| ${2:/*funcao*/} })"
+		],
+		"description": "Executa uma função para cada elemento de um array - https://tdn.totvs.com/display/public/framework/AEval"
+	},
+	"aSort": {
+		"prefix": "ASort",
+		"body": [
+			"ASort(${1:/*aArray*/}, {|x,y| ${2:/*funcao*/} })"
+		],
+		"description": "Ordena um array - https://tdn.totvs.com/display/public/framework/ASort"
+	},
+	"aSize": {
+		"prefix": "aSize",
+		"body": [
+			"aSize(${1:/*aArray*/})"
+		],
+		"description": "Retorna o tamanho de um array - https://tdn.totvs.com/display/public/framework/aSize"
+	},
+	"aScan": {
+		"prefix": "aScan",
+		"body": [
+			"aScan(${1:/*aArray*/}, {|x| ${2:/*funcao*/} })"
+		],
+		"description": "Procura um elemento em um array - https://tdn.totvs.com/display/public/framework/aScan"
+	},
+	"cToD": {
+		"prefix": "cToD",
+		"body": [
+			"cToD(${1:/*cData*/})"
+		],
+		"description": "Converte uma data no formato string para o formato date - https://tdn.totvs.com/display/public/framework/cToD"
+	},
+	"dToC": {
+		"prefix": "dToC",
+		"body": [
+			"dToC(${1:/*dData*/})"
+		],
+		"description": "Converte uma data no formato date para o formato string - https://tdn.totvs.com/display/public/framework/dToC"
 	}
 }
