@@ -1,4 +1,18 @@
 {
+	"GDFieldPut": {
+		"prefix": "GDFieldPut",
+		"body": [
+			"GDFieldPut(\"${1:/*cCampo*/}\", ${2:/*xConteudo*/})"
+		],
+		"description": "GDFieldPut - Insere um valor em um campo do modelo"
+	},
+	"GDFieldGet": {
+		"prefix": "GDFieldGet",
+		"body": [
+			"GDFieldGet(\"${1:/*cCampo*/}\")"
+		],
+		"description": "GDFieldGet - Retorna o valor de um campo do modelo"
+	},
 	"FwExecStatement":{
 		"prefix": "FwExecStatement - Query",
 		"description": "Monta uma query ",
