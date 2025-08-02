@@ -356,13 +356,6 @@
 		],
 		"description": "Help padrao"
 	},
-	"Ascan": {
-		"prefix": "Ascan - Exemplo",
-		"body": [
-			"aScan(${1:/*array procurado*/},{|x|Alltrim(x[1]) == \" ${2:/*valor procurado*/}\"})"
-		],
-		"description": "Exemplo aScan procurando na posicao 1"
-	},
 	"FWxFilial": {
 		"prefix": "FWFWxFilial",
 		"body": [
@@ -391,7 +384,7 @@
 			"RpcClearEnv()"
 		]
 	},
-	"fwtemporarytable": {
+	"FWTemporaryTable": {
 		"prefix": "fwtemporarytable - Snippet",
 		"body": [
 			"\tLocal aFields := {}",
