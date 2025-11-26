@@ -13,7 +13,7 @@
 		],
 		"description": "GDFieldGet - Retorna o valor de um campo do modelo"
 	},
-	"FwExecStatement":{
+	"FwExecStatement": {
 		"prefix": "FwExecStatement - Query",
 		"description": "Monta uma query ",
 		"body": [
@@ -37,7 +37,7 @@
 			"\tFreeObj(oQuery)",
 		]
 	},
-	"FWExecScalar":{
+	"FWExecScalar": {
 		"prefix": "FWExecScalar - RECNO",
 		"description": "Procura um determinado RECNO na base de dados conforme filtros que podem ser informados",
 		"body": [
@@ -764,19 +764,18 @@
 		],
 		"description": "Gera um UUID V4"
 	},
-	"FWUUIDV4" : {
+	"FWUUIDV4": {
 		"prefix": "FWUUIDV4",
 		"body": [
 			"FWUUIDV4()"
 		],
 		"description": "Gera um UUID V4"
 	},
-	"FWTimeStamp" : {
+	"FWTimeStamp": {
 		"prefix": "FWTimeStamp",
 		"body": [
 			"FWTimeStamp()"
 		],
-	
 		"description": "Retorna a data e hora atual - https://tdn.totvs.com/display/public/framework/FWTimeStamp"
 	},
 	"FwDateTimeToLocal": {
@@ -834,5 +833,19 @@
 			"dToC(${1:/*dData*/})"
 		],
 		"description": "Converte uma data no formato date para o formato string - https://tdn.totvs.com/display/public/framework/dToC"
+	},
+	"FWSX3Util():GetFieldStruct()[Tamanho]": {
+		"prefix": "FWSx3Util",
+		"body": [
+			"FWSX3Util():GetFieldStruct( ${1:/*dData*/} )[3]"
+		],
+		"description": "Retorna o tipo do campo no SX3 ou vazio quando não encontra o campo - Tamanho"
+	},
+	"FWSX3Util():GetFieldStruct[Decimal]": {
+		"prefix": "FWSx3Util",
+		"body": [
+			"FWSX3Util():GetFieldStruct( ${1:/*dData*/} )[4]"
+		],
+		"description": "Retorna o tipo do campo no SX3 ou vazio quando não encontra o campo - Decimal"
 	}
 }
