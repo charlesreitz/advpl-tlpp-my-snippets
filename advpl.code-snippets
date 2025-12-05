@@ -847,5 +847,22 @@
 			"FWSX3Util():GetFieldStruct( ${1:/*dData*/} )[4]"
 		],
 		"description": "Retorna o tipo do campo no SX3 ou vazio quando não encontra o campo - Decimal"
+	},
+"Classe TLPP": {
+		"prefix": "Classe TLPP",
+		"body": [
+			"#include \"tlpp-core.th\"",
+			"",
+			"Class MyClass",
+			"private data nValue as numeric",
+			"private data cValue as character",
+			"	",
+			"public method New()",
+			"EndClass",
+			"",
+			"Method New() class MyClass",
+			"Return Self",
+		],
+		"description": "Monta estrutura de uma classe padrao"
 	}
 }
